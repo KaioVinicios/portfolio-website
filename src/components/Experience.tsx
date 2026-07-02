@@ -2,38 +2,13 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedBackground } from "./AnimatedBackground";
+import { portfolioConfig } from "@/config/portfolio";
 
-const experiences = [
-  {
-    role: "Desenvolvedor Full Stack",
-    company: "Rosetta",
-    period: "08/2025 — Atualmente",
-    description:
-      "Atuo como responsável pelo desenvolvimento técnico dos projetos, conciliando demandas de clientes com a construção de um produto próprio em fase avançada de desenvolvimento, sempre seguindo boas práticas de engenharia de software.",
-    achievements: [
-      "Desenvolvimento full stack utilizando React e Django REST",
-      "Modelagem de banco de dados PostgreSQL",
-      "Desenvolvimento de APIs REST",
-      "Desenvolvimento de interfaces de usuário responsivas",
-      "Testes unitários",
-      "Implementação de soluções em produção",
-    ],
-  },
-  {
-    role: "Desenvolvedor RPA",
-    company: "Influir",
-    period: "03/2024 - 11/2024",
-    description:
-      "Fui responsável por analisar processos existentes, validar a aderência das automações ao fluxo real de negócio e desenvolver soluções automatizadas que reduzissem tempo de execução, identificassem falhas de processo e aumentassem a confiabilidade operacional.",
-    achievements: [
-      "Desenvolvimento de automações em Python, C# e JavaScript",
-      "Implantação de soluções automatizadas",
-      "Testes de automações",
-    ],
-  },
-];
+const { experiences, labels } = portfolioConfig;
 
 export function Experience() {
+  if (experiences.length === 0) return null;
+
   return (
     <section id="experience" className="section-padding bg-muted/30 relative overflow-hidden">
       <AnimatedBackground />
@@ -45,10 +20,10 @@ export function Experience() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
-            Experiência
+            {labels.experience.eyebrow}
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-12">
-            Onde trabalhei
+            {labels.experience.heading}
           </h3>
         </motion.div>
 

@@ -1,25 +1,25 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
+import { portfolioConfig } from "@/config/portfolio";
+
+const { links, labels } = portfolioConfig;
 
 const socials = [
   {
     label: "Email",
-    href: "mailto:kvsgpro@outlook.com",
+    href: `mailto:${links.email}`,
     icon: Mail,
-    value: "Email",
   },
   {
     label: "GitHub",
-    href: "https://github.com/KaioVinicios",
+    href: links.github,
     icon: Github,
-    value: "GitHub",
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/kaiovinicios",
+    href: links.linkedin,
     icon: Linkedin,
-    value: "LinkedIn",
   },
 ];
 
@@ -35,14 +35,13 @@ export function Contact() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
-            Contato
+            {labels.contact.eyebrow}
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            Vamos trabalhar juntos
+            {labels.contact.heading}
           </h3>
           <p className="text-muted-foreground leading-relaxed mb-10">
-            Estou atualmente aberto a novas oportunidades e colaborações. Se você tem um 
-            projeto em mente ou apenas quer dizer olá, sinta-se à vontade para entrar em contato.
+            {labels.contact.pitch}
           </p>
 
           <motion.div
@@ -57,9 +56,9 @@ export function Contact() {
               whileTap={{ scale: 0.98 }}
             >
               <Button size="lg" asChild>
-                <a href="mailto:kvsgpro@outlook.com">
+                <a href={`mailto:${links.email}`}>
                   <Mail className="mr-2 h-4 w-4" />
-                  Entre em contato
+                  {labels.contact.emailButton}
                 </a>
               </Button>
             </motion.div>
@@ -92,7 +91,7 @@ export function Contact() {
                 whileHover={{ y: -2 }}
               >
                 <social.icon className="h-4 w-4" />
-                <span>{social.value}</span>
+                <span>{social.label}</span>
                 <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.a>
             ))}

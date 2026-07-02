@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { portfolioConfig } from "@/config/portfolio";
+
+const { person, labels } = portfolioConfig;
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,8 +16,8 @@ export function Footer() {
     >
       <div className="container-narrow">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {currentYear} Kaio Vinícios. Todos direitos reservados.</p>
-          <p>Feito com React & Tailwind</p>
+          <p>© {currentYear} {person.name}. {labels.footer.rights}</p>
+          <p>{labels.footer.madeWith}</p>
         </div>
       </div>
     </motion.footer>

@@ -3,61 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
+import { portfolioConfig } from "@/config/portfolio";
 
-const projects = [
-  {
-    title: "Rosetta Landing Page",
-    description:
-      "Uma página inicial para uma empresa que presta serviços de apoio aos clientes em seus negócios.",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Shadcn UI", "Radix UI", "Framer Motion", "Vite", "EmailJS"],
-    github: "https://github.com/RosettaSolutions/RosettaLandingPage",
-    live: "https://rosetta-solutions.com",
-  },
-  {
-    title: "CryptoVault",
-    description:
-      "Um SAAS voltado para armazenamento de arquivos com criptografia avançada e recursos em blockchain.",
-    tech: ["React", "TypeScript","Django REST", "Python","Tailwind CSS", "Shadcn UI" , "PostgreSQL", "WEB3", "Python", "Docker"],
-    github: "https://github.com/RosettaSolutions/CryptoVaultFrontEnd",
-    live: "https://cryptovault.rosetta-solutions.com",
-  },
-  {
-    title: "Solução para Atos Capital",
-    description:
-      "Um dashboard para a empresa Atos Capital, que permite a visualização de dados de clientes além de uma integração DB | IA | WhatsApp para consultas personalizadas.",
-    tech: ["React", "TypeScript", "Django REST", "Python", "Git", "Docker", "PostgreSQL", "Swagger", "Microsoft SQL Server", "Gemini API", "N8N", "Waha"],
-    github: "https://github.com/KaioVinicios/AtosCapitalBackend",
-    // live: "#",
-    detail: "Há mais informações e imagens sobre esse projeto no meu LinkedIn > Experiência."
-  },
-  {
-    title: "SafeNumber",
-    description:
-      "Solução criada para resolver um problema de segurança da Amadeus & Santos Advogados Associados, que permite a validação de números, contando com um painel administrativo para gerenciar os números internos e verificar relatórios de números maliciosos.",
-    tech: ["Django REST", "Python", "React", "TypeScript", "Tailwind CSS", "Docker", "PostgreSQL", "Swagger"],
-    // github: "https://github.com/Squad15-JotaNunes/ObraSpecAPI",
-    live: "https://safe-number.com/amadeus-santos-advogados",
-    detail: "Esse card não conta com link de GitHub pois se trata de uma solução privada."
-  },
-  {
-    title: "ObraSpec API",
-    description:
-      "API realizada para JotaNunes construtora, que permite a criação de modo padronizável e escalável de requistos de obras, como também a geração automática de documentos.",
-    tech: ["Django REST", "Python", "Git", "Docker", "PostgreSQL", "Swagger"],
-    github: "https://github.com/Squad15-JotaNunes/ObraSpecAPI",
-    // live: "#",
-  },
-  {
-    title: "Apoio Fiel",
-    description:
-      "API criada e dedicada a uma ONG, visando auxiliar na gestão de doações e localização de animais de rua.",
-    tech: ["Node.js", "Prisma", "Fastify", "TypeScript", "Docker", "Git", "Swagger"],
-    github: "https://github.com/Apoio-Fiel",
-    // live: "https://safe-number.com/amadeus-santos-advogados",
-  },
-];
+const { projects, labels } = portfolioConfig;
 
 export function Projects() {
+  if (projects.length === 0) return null;
+
   return (
     <section id="projects" className="section-padding">
       <div className="container-narrow">
@@ -68,10 +20,10 @@ export function Projects() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
-            Projetos
+            {labels.projects.eyebrow}
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-12">
-            Trabalhos selecionados
+            {labels.projects.heading}
           </h3>
         </motion.div>
 
@@ -110,7 +62,7 @@ export function Projects() {
                         <Button variant="ghost" size="sm" asChild>
                           <a href={project.github} target="_blank" rel="noopener noreferrer">
                             <Github className="h-4 w-4 mr-1" />
-                            Code
+                            {labels.projects.codeButton}
                           </a>
                         </Button>
                       )}
@@ -118,7 +70,7 @@ export function Projects() {
                         <Button variant="ghost" size="sm" asChild>
                           <a href={project.live} target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="h-4 w-4 mr-1" />
-                            Live
+                            {labels.projects.liveButton}
                           </a>
                         </Button>
                       ) : null}

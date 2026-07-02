@@ -3,15 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { portfolioConfig } from "@/config/portfolio";
+import { getNavItems } from "@/config/nav";
 
-const navItems = [
-  { label: "Sobre", href: "#about" },
-  { label: "Experiência", href: "#experience" },
-  { label: "Projetos", href: "#projects" },
-  { label: "Certificações", href: "#certificates" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contato", href: "#contact" },
-];
+const { labels } = portfolioConfig;
+const navItems = getNavItems();
 
 export function Navbar() {
   const { setTheme, resolvedTheme } = useTheme();
@@ -40,7 +36,7 @@ export function Navbar() {
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          Portfólio
+          {labels.nav.brand}
         </motion.a>
 
         {/* Desktop Navigation */}

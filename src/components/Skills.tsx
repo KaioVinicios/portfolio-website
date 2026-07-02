@@ -1,25 +1,9 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedBackground } from "./AnimatedBackground";
+import { portfolioConfig } from "@/config/portfolio";
 
-const skillCategories = [
-  {
-    title: "Frontend",
-    skills: ["React", "TypeScript", "JavaScript", "Next.js", "Shadcn UI", "Radix UI", "Tailwind CSS", "Framer Motion", "Lucide Icons", "Bootstrap", "Tailwind CSS", "Framer Motion", "Lucide Icons", "Bootstrap"],
-  },
-  {
-    title: "Backend",
-    skills: ["Django", "Python", "TypeScript", "JavaScript", "Django Rest Framework", "Node.js", "REST APIs"],
-  },
-  {
-    title: "Database",
-    skills: ["PostgreSQL", "MySQL", "Microsoft SQL Server", "Prisma", "Django ORM"],
-  },
-  {
-    title: "DevOps & Tools",
-    skills: ["Google Cloud", "Docker", "Git", "GitHub", "Cloudflare", "Vercel", "Linux", "Supabase", "Stripe", "Postman", "Vultr", "Grafana"],
-  },
-];
+const { skillCategories, labels } = portfolioConfig;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -37,6 +21,8 @@ const itemVariants = {
 };
 
 export function Skills() {
+  if (skillCategories.length === 0) return null;
+
   return (
     <section id="skills" className="section-padding bg-muted/30 relative overflow-hidden">
       <AnimatedBackground />
@@ -48,10 +34,10 @@ export function Skills() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
-            Skills
+            {labels.skills.eyebrow}
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-12">
-            Tecnologias que uso
+            {labels.skills.heading}
           </h3>
         </motion.div>
 
