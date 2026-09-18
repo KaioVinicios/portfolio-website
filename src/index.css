@@ -1,97 +1,165 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/figtree";
 @import "./App.css";
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* Light neutral ramp. Four separated steps, deliberately spaced in OKLCH L
+       so each surface role is distinguishable at a glance:
+         page   0.985  ·  wash 0.945  ·  fill 0.94  ·  surface 1.0
+       The page is an off-white rather than pure white so cards and popovers
+       (pure white) sit *above* it — depth by tone, not by shadow, per the
+       Flat-By-Default rule. The old ramp had page, card and popover all at
+       L 1.0 with a 0.97 fill, which left the light theme with effectively two
+       tones and a section wash 0.9% away from the page. */
+    --background: oklch(0.985 0 0);
+    --foreground: oklch(0.145 0 0);
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
 
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
+    /* Primary = Ink, plain neutral invert: no accent hue anywhere in this palette. */
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --primary-soft: oklch(0.9 0 0 / 60%);
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: oklch(0.94 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted: oklch(0.94 0 0);
+    --muted-foreground: oklch(0.47 0 0);
 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: oklch(0.94 0 0);
+    --accent-foreground: oklch(0.205 0 0);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: oklch(0.58 0.22 27);
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    /* Wash behind the alternating sections. A dedicated token rather than an
+       alpha of --muted: the two roles need to diverge per theme (in dark, the
+       hover fill is much lighter than the band), and an alpha over the page
+       made the light band collapse into the background. */
+    --surface-wash: oklch(0.945 0 0);
+
+    --border: oklch(0.885 0 0);
+    --input: oklch(0.885 0 0);
+    --ring: oklch(0.205 0 0);
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.35 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.9 0 0);
+    --sidebar-ring: oklch(0.205 0 0);
+
+    --chart-1: oklch(0.6 0 0);
+    --chart-2: oklch(0.5 0 0);
+    --chart-3: oklch(0.4 0 0);
+    --chart-4: oklch(0.7 0 0);
+    --chart-5: oklch(0.3 0 0);
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: oklch(0.985 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --primary-soft: oklch(0.32 0 0 / 45%);
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.72 0 0);
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: oklch(0.3 0 0);
+    --accent-foreground: oklch(0.985 0 0);
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    /* Matches what bg-muted/30 already composited to in dark mode (L 0.184),
+       so the dark bands are unchanged by this refactor. */
+    --surface-wash: oklch(0.185 0 0);
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --destructive: oklch(0.7 0.19 22.2);
 
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.85 0 0);
+
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.85 0 0);
+    --sidebar-primary: oklch(0.985 0 0);
+    --sidebar-primary-foreground: oklch(0.205 0 0);
+    --sidebar-accent: oklch(0.3 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.85 0 0);
+
+    --chart-1: oklch(0.7 0 0);
+    --chart-2: oklch(0.6 0 0);
+    --chart-3: oklch(0.5 0 0);
+    --chart-4: oklch(0.8 0 0);
+    --chart-5: oklch(0.4 0 0);
+  }
+}
+
+@keyframes timeline-flow {
+  from {
+    background-position: 0 -5rem;
+  }
+  to {
+    background-position: 0 calc(100% + 5rem);
   }
 }
 
 @layer utilities {
+  /* A single soft band of ink travelling down the Experience timeline's
+     hairline, on a continuous 7s loop. Painted as a background-image over the
+     existing bg-border colour, so the rule itself never moves and nothing in
+     the layout is animated — on a 1px-wide strip the repaint is negligible. */
+  .timeline-flow {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in oklab, var(--foreground) 68%, transparent) 50%,
+      transparent 100%
+    );
+    background-size: 100% 5rem;
+    background-repeat: no-repeat;
+    animation: timeline-flow 7s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-flow {
+      background-image: none;
+      animation: none;
+    }
+  }
+
   .section-padding {
     @apply py-20 md:py-28 lg:py-32;
   }
 
   .container-narrow {
     @apply max-w-4xl mx-auto px-6 md:px-8;
+  }
+
+  /* Consistent keyboard-focus ring for raw <a> tags (Button already has its
+     own focus-visible treatment; this brings plain links to parity). */
+  .link-focus {
+    @apply rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 }
