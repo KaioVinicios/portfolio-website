@@ -205,10 +205,23 @@ const LetterGlitch = ({
 
     context.current = canvas.getContext("2d");
     resizeCanvas();
-    animate();
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Reduced motion: draw one static frame and never start the glitch loop.
+    if (prefersReducedMotion) {
+      let resizeTimeout: number;
+      const handleStaticResize = () => {
+        window.clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(resizeCanvas, 100);
+      };
+      window.addEventListener("resize", handleStaticResize);
+      return () => window.removeEventListener("resize", handleStaticResize);
+    }
 
     let resizeTimeout: number;
-
     const handleResize = () => {
       window.clearTimeout(resizeTimeout);
       resizeTimeout = window.setTimeout(() => {
@@ -218,13 +231,27 @@ const LetterGlitch = ({
         animate();
       }, 100);
     };
-
     window.addEventListener("resize", handleResize);
 
+    // Pause the glitch loop while the canvas is scrolled off-screen so it
+    // doesn't burn CPU/battery for the rest of the visit.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!animationRef.current) animate();
+        } else if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+          animationRef.current = null;
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
     return () => {
-      if (animationRef.current)
-        cancelAnimationFrame(animationRef.current);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", handleResize);
+      observer.disconnect();
     };
   }, [glitchSpeed, smooth]);
 
