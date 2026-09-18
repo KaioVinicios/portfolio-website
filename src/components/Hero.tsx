@@ -16,8 +16,8 @@ export function Hero() {
     setMounted(true);
   }, []);
 
-  const darkColors = ["#1a1a1a","#363636","#242424"];
-  const lightColors = ["#f5f5f5","#e2e2e3","#f2f2f2"];
+  const darkColors = ["#1a1a1a", "#363636", "#242424"];
+  const lightColors = ["#f5f5f5", "#e2e2e3", "#f2f2f2"];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden bg-background">
