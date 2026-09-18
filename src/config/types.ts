@@ -41,6 +41,8 @@ export interface Project {
   live?: string;
   /** Optional footnote rendered at the bottom of the card. */
   detail?: string;
+  /** Optional screenshot/thumbnail path or URL. The first project (featured) falls back to a larger text-only treatment when omitted; omit safely rather than using a generic stock image. */
+  image?: string;
 }
 
 export interface Experience {
@@ -114,6 +116,8 @@ export interface Labels {
     heading: string;
     codeButton: string;
     liveButton: string;
+    /** Headline of the GitHub call-to-action closing the section. */
+    githubCta: string;
   };
   certificates: {
     eyebrow: string;

@@ -223,6 +223,7 @@ export const portfolioConfig: PortfolioConfig = {
       heading: "Trabalhos selecionados",
       codeButton: "Code",
       liveButton: "Live",
+      githubCta: "Todo o código está no GitHub",
     },
     certificates: {
       eyebrow: "Certificações",
