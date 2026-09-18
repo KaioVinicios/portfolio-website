@@ -124,6 +124,10 @@ export interface Labels {
     heading: string;
     educationSubheading: string;
     certificationsSubheading: string;
+    /** Screen-reader-only suffix stating where a certificate row leads. */
+    credentialHint: string;
+    /** Link under the certificate list, shown only when certificationsRepoUrl is set. */
+    repoLink: string;
   };
   skills: {
     eyebrow: string;
@@ -160,6 +164,8 @@ export interface PortfolioConfig {
   /** education AND certifications both empty hides the Certificates section. */
   education: Education[];
   certifications: Certification[];
+  /** Optional link to a fuller archive of certificates (e.g. a Drive folder or GitHub repo). Rendered as its own labeled link below the grid — omit rather than adding a fake "view all" entry to `certifications`. */
+  certificationsRepoUrl?: string;
   /** Empty array hides the Skills section and its nav link. */
   skillCategories: SkillCategory[];
   labels: Labels;

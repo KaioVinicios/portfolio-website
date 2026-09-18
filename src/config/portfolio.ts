@@ -156,19 +156,9 @@ export const portfolioConfig: PortfolioConfig = {
       year: "2023",
       credentialUrl: "https://www.skills.google/public_profiles/52f8e364-5cbe-4e24-a81c-9d6b8643f6c1/",
     },
-    {
-      title: "Docker",
-      institution: "Alura",
-      year: "2024",
-      credentialUrl: "https://cursos.alura.com.br/certificate/8a7c8cee-5820-4b10-aae6-bcee91ab232e",
-    },
-    {
-      title: "Ver todas",
-      institution: "Visualize o repositório completo",
-      year: "Desde 2023",
-      credentialUrl: "https://drive.google.com/drive/folders/16LoR8Few6JyMRGGk_yrQxGPqp__5FqkG?hl=pt-br",
-    },
   ],
+
+  certificationsRepoUrl: "https://drive.google.com/drive/folders/16LoR8Few6JyMRGGk_yrQxGPqp__5FqkG?hl=pt-br",
 
   skillCategories: [
     {
@@ -230,6 +220,8 @@ export const portfolioConfig: PortfolioConfig = {
       heading: "Educação & Certificados",
       educationSubheading: "Educação",
       certificationsSubheading: "Certificados",
+      credentialHint: "Ver credencial",
+      repoLink: "Ver repositório completo",
     },
     skills: {
       eyebrow: "Skills",
