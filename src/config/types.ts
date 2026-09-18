@@ -22,6 +22,13 @@ export interface SocialLinks {
   email: string;
   github: string;
   linkedin: string;
+  /**
+   * Digits only — country code + area code + number, with no "+", spaces or
+   * dashes. That's the shape wa.me expects: "5579988853741" is +55 79 98885-3741.
+   */
+  whatsapp: string;
+  /** Full profile URL. */
+  x: string;
 }
 
 export interface Project {
@@ -75,6 +82,17 @@ export interface Labels {
     skills: string;
     contact: string;
   };
+  /** Labels for the navbar's expandable contact menu (desktop). */
+  contactMenu: {
+    /** Row label for the email channel; GitHub/LinkedIn use their own names. */
+    email: string;
+    /** Accessible label of the "copy email" button at rest. */
+    copy: string;
+    /** Accessible label and confirmation text once the email is copied. */
+    copied: string;
+    /** Link at the bottom of the menu, pointing at the contact section. */
+    viewSection: string;
+  };
   hero: {
     /** Primary button (scrolls to projects). */
     viewProjects: string;
@@ -114,6 +132,8 @@ export interface Labels {
     pitch: string;
     /** Text of the email button. */
     emailButton: string;
+    /** Word set between the email button and the secondary channel links. */
+    divider: string;
   };
   footer: {
     /** Rendered after "© <year> <name>." */

@@ -32,6 +32,8 @@ export const portfolioConfig: PortfolioConfig = {
     email: "kvsgpro@outlook.com",
     github: "https://github.com/KaioVinicios",
     linkedin: "https://www.linkedin.com/in/kaiovinicios/",
+    whatsapp: "5579988853741",
+    x: "https://x.com/KaioVinicios__",
   },
 
   techStack: [
@@ -197,6 +199,12 @@ export const portfolioConfig: PortfolioConfig = {
       skills: "Skills",
       contact: "Contato",
     },
+    contactMenu: {
+      email: "E-mail",
+      copy: "Copiar e-mail",
+      copied: "E-mail copiado",
+      viewSection: "Ver seção de contato",
+    },
     hero: {
       viewProjects: "Ver Projetos",
       linkedin: "LinkedIn",
@@ -232,6 +240,7 @@ export const portfolioConfig: PortfolioConfig = {
       pitch:
         "Estou atualmente aberto a novas oportunidades e colaborações. Se você tem um projeto em mente ou apenas quer dizer olá, sinta-se à vontade para entrar em contato.",
       emailButton: "Entre em contato",
+      divider: "ou",
     },
     footer: {
       rights: "Todos direitos reservados.",
