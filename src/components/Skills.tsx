@@ -24,7 +24,7 @@ export function Skills() {
   if (skillCategories.length === 0) return null;
 
   return (
-    <section id="skills" className="section-padding bg-muted/30 relative overflow-hidden">
+    <section id="skills" className="section-padding relative overflow-hidden">
       <AnimatedBackground />
       <div className="container-narrow relative z-10">
         <motion.div
