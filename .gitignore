@@ -1,3 +1,6 @@
+docs/dev/*
+.impeccable/
+
 # Logs
 logs
 *.log
