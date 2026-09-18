@@ -146,8 +146,6 @@ export interface Labels {
   footer: {
     /** Rendered after "© <year> <name>." */
     rights: string;
-    /** Second footer line. */
-    madeWith: string;
   };
 }
 

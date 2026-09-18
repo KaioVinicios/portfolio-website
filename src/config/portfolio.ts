@@ -237,7 +237,6 @@ export const portfolioConfig: PortfolioConfig = {
     },
     footer: {
       rights: "Todos direitos reservados.",
-      madeWith: "Feito com React & Tailwind",
     },
   },
 };

@@ -14,11 +14,12 @@ export function Footer() {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
+      {/* Single centered line: the copyright is the footer's only content, so
+          the old two-column split would leave one side empty. */}
       <div className="container-narrow">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {currentYear} {person.name}. {labels.footer.rights}</p>
-          <p>{labels.footer.madeWith}</p>
-        </div>
+        <p className="text-center text-sm text-muted-foreground">
+          © {currentYear} {person.name}. {labels.footer.rights}
+        </p>
       </div>
     </motion.footer>
   );
