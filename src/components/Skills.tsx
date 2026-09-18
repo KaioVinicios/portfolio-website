@@ -33,10 +33,7 @@ export function Skills() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
-            {labels.skills.eyebrow}
-          </h2>
-          <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-12">
+          <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-balance">
             {labels.skills.heading}
           </h3>
         </motion.div>

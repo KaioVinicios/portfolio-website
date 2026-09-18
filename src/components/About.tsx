@@ -16,10 +16,7 @@ export function About() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
-            {labels.about.eyebrow}
-          </h2>
-          <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-8">
+          <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-8 text-balance">
             {labels.about.heading}
           </h3>
         </motion.div>
