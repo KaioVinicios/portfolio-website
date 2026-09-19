@@ -19,6 +19,7 @@ export const portfolioConfig: PortfolioConfig = {
       "Desenvolvedor Full Stack: APIs REST em Python e Django REST Framework, interfaces em React e TypeScript. Software em produção para clientes reais desde 2023.",
     siteUrl: "https://kaio.voynan.com",
     language: "pt-BR",
+    ogImage: "/og-image.png",
   },
 
   person: {

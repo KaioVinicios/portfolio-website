@@ -78,9 +78,10 @@ What ships on every build, without any extra step:
 Set `meta.siteUrl` to your own domain before deploying a fork — it is the one
 field the whole SEO surface hangs off.
 
-**Social preview image:** drop a 1200×630 PNG or JPG in `public/` and point
-`meta.ogImage` at it (e.g. `"/og-image.png"`). Without it, links still unfurl
-with a title and description, just no picture.
+**Social preview image:** `public/og-image.png` (1200×630) is what LinkedIn,
+WhatsApp and X show when the site is shared. Replace it with your own and
+point `meta.ogImage` at the new file — or clear the field, and links still
+unfurl with a title and description, just no picture.
 
 ## Analytics (optional)
 
