@@ -15,6 +15,10 @@ import type { PortfolioConfig } from "./types";
 export const portfolioConfig: PortfolioConfig = {
   meta: {
     title: "Kaio Vinícios — Desenvolvedor Full Stack",
+    description:
+      "Desenvolvedor Full Stack: APIs REST em Python e Django REST Framework, interfaces em React e TypeScript. Software em produção para clientes reais desde 2023.",
+    siteUrl: "https://kaio.voynan.com",
+    language: "pt-BR",
   },
 
   person: {

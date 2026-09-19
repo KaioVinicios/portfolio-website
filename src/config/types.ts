@@ -2,8 +2,28 @@
 // Forks edit src/config/portfolio.ts — not this file.
 
 export interface Meta {
-  /** Browser tab / document title. */
+  /** Browser tab / document title. Also the <title>, og:title and twitter:title. */
   title: string;
+  /**
+   * Meta description: one sentence, ~150-160 characters. Search engines and
+   * social cards both read it, so write it for a human, not for keywords.
+   */
+  description: string;
+  /**
+   * Canonical origin of the deployed site, with protocol and no trailing
+   * slash (e.g. "https://kaio.voynan.com"). Everything absolute — canonical,
+   * og:url, sitemap.xml, robots.txt, JSON-LD @id — is derived from it.
+   */
+  siteUrl: string;
+  /** BCP-47 language tag for <html lang> and og:locale (e.g. "pt-BR"). */
+  language: string;
+  /**
+   * Social preview image: 1200x630, PNG or JPG, either a site-root path
+   * ("/og-image.png", file living in public/) or an absolute URL. Omit it and
+   * no og:image is emitted at all — better a card with no image than a card
+   * pointing at a 404.
+   */
+  ogImage?: string;
 }
 
 export interface Person {

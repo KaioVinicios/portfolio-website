@@ -32,7 +32,11 @@ Everything you need to change lives in **`src/config/portfolio.ts`** — a singl
 
 | Property | What it controls |
 |---|---|
-| `meta.title` | Browser tab title |
+| `meta.title` | Browser tab title, `og:title` and the JSON-LD page name |
+| `meta.description` | Meta description and social-card text (~150–160 characters) |
+| `meta.siteUrl` | Canonical origin of the deployed site — every absolute URL (canonical, `og:url`, `sitemap.xml`, `robots.txt`, JSON-LD) is derived from it |
+| `meta.language` | BCP-47 tag for `<html lang>` and `og:locale` (e.g. `pt-BR`) |
+| `meta.ogImage` | Optional 1200×630 social preview image; omit it and no `og:image` is emitted |
 | `person.name` | Hero heading and footer copyright |
 | `person.role` | Small line above your name in the hero |
 | `person.tagline` | Hero subtitle paragraph |
@@ -51,6 +55,32 @@ The config is fully typed (see `src/config/types.ts`): if you remove a required 
 **Hiding sections:** leave an array empty and the section disappears along with its navbar link. No certifications yet? Set `education: []` and `certifications: []` and the whole section is gone — no JSX editing needed.
 
 **Favicon:** replace `public/folder-code.svg` (or add your own file and update the `<link rel="icon">` in `index.html`).
+
+## SEO
+
+Search and social metadata is derived from the same config and written into
+`index.html` **at build time** by the `seo` plugin in `vite.config.ts` (see
+`src/lib/seo.ts`). That matters for a client-rendered SPA: social scrapers
+(LinkedIn, WhatsApp, X, Slack) and crawlers that don't run JavaScript never
+see tags a component sets at runtime.
+
+What ships on every build, without any extra step:
+
+- `<title>`, meta description, author, `<html lang>` and a canonical URL
+- Open Graph and Twitter card tags (image tags only when `meta.ogImage` is set)
+- A `robots` directive that lifts Google's default preview limits
+- JSON-LD `@graph` with `WebSite`, `ProfilePage` and `Person` — the Person node
+  picks up `sameAs` from `links`, `knowsAbout` from `techStack`, `alumniOf`
+  from `education` and `hasCredential` from `certifications`
+- `robots.txt` and `sitemap.xml`, generated into `dist/` and also served by
+  `npm run dev`, so local and production behave the same
+
+Set `meta.siteUrl` to your own domain before deploying a fork — it is the one
+field the whole SEO surface hangs off.
+
+**Social preview image:** drop a 1200×630 PNG or JPG in `public/` and point
+`meta.ogImage` at it (e.g. `"/og-image.png"`). Without it, links still unfurl
+with a title and description, just no picture.
 
 ## Analytics (optional)
 
