@@ -44,6 +44,7 @@ export const portfolioConfig: PortfolioConfig = {
 
   techStack: [
     "Python",
+    "Go",
     "TypeScript",
     "JavaScript",
     "Java",
@@ -56,7 +57,10 @@ export const portfolioConfig: PortfolioConfig = {
     "Node.js",
     "Fastify",
     "Prisma",
+    "Uber Fx",
     "JWT",
+    "OAuth 2.0 / OIDC",
+    "Keycloak",
     "OpenAPI / Swagger",
     "Stripe",
     "React",
@@ -74,6 +78,8 @@ export const portfolioConfig: PortfolioConfig = {
     "Neon",
     "Docker",
     "AWS",
+    "AWS SQS",
+    "AWS SNS",
     "Cloudflare",
     "Google Cloud",
     "Railway",
@@ -83,6 +89,9 @@ export const portfolioConfig: PortfolioConfig = {
     "Playwright",
     "Pandas",
     "pytest",
+    "k6",
+    "Prometheus",
+    "Grafana",
     "Sentry",
     "PostHog",
     "Web3",
@@ -112,6 +121,15 @@ export const portfolioConfig: PortfolioConfig = {
       tech: ["Django REST", "Python", "PostgreSQL", "React", "TypeScript", "Web3", "AES-GCM", "Docker", "Stripe"],
       github: "https://github.com/RosettaSolutions/CryptoVaultFrontEnd",
       live: "https://cryptovault.rosetta-solutions.com",
+    },
+    {
+      title: "Distributed Wager Processor",
+      description:
+        "Serviço distribuído em Go que movimenta carteiras de jogadores a partir de operações de provedores de jogos — aposta, ganho, reembolso e rollback — recebidas por HTTP e por SQS com as mesmas garantias. Roda em três réplicas sem lock global: a coordenação é por carteira no PostgreSQL, a idempotência é persistente e a inbox e a outbox transacionais, com leases, deixam outra instância reassumir o trabalho de uma réplica que caiu. Ledger append-only e dinheiro em inteiros, sem ponto flutuante.",
+      tech: ["Go", "PostgreSQL", "AWS SQS", "AWS SNS", "Keycloak", "OIDC", "Uber Fx", "Prometheus", "Grafana", "Docker", "k6"],
+      github: "https://github.com/KaioVinicios/distributed-wager-processor",
+      detail:
+        "Teste de carga a 100 req/s nas três réplicas: p99 de 98 ms, zero erros e 1.000 de 1.000 carteiras consistentes. Concorrência, quedas e indisponibilidade de dependências são comprovadas por testes e2e contra três processos reais.",
     },
     {
       title: "Voynan Landing Page",
@@ -261,11 +279,15 @@ export const portfolioConfig: PortfolioConfig = {
   skillCategories: [
     {
       title: "Linguagens",
-      skills: ["Python", "TypeScript", "JavaScript", "C#", "SQL", "PHP"],
+      skills: ["Python", "Go", "TypeScript", "JavaScript", "Java", "C#", "SQL", "PHP"],
     },
     {
       title: "Back-end",
-      skills: ["Django", "Django REST Framework", "APIs REST", "JWT", "OpenAPI / Swagger", "Node.js", "Fastify", "Prisma", "Django ORM", "Stripe"],
+      skills: ["Django", "Django REST Framework", "APIs REST", "JWT", "OAuth 2.0 / OIDC", "Keycloak", "OpenAPI / Swagger", "Node.js", "Fastify", "Prisma", "Django ORM", "Uber Fx", "Stripe"],
+    },
+    {
+      title: "Sistemas distribuídos",
+      skills: ["Mensageria (SQS / SNS)", "Idempotência", "Transactional Inbox / Outbox", "Controle de concorrência", "Ledger append-only", "Tolerância a falhas", "Retry com backoff", "Dead-letter queues"],
     },
     {
       title: "Front-end",
@@ -273,11 +295,11 @@ export const portfolioConfig: PortfolioConfig = {
     },
     {
       title: "Dados e infraestrutura",
-      skills: ["PostgreSQL", "Neon", "Docker", "AWS", "Cloudflare", "Google Cloud", "Railway", "Git", "GitHub Actions", "CI/CD"],
+      skills: ["PostgreSQL", "Neon", "Docker", "Docker Compose", "AWS", "Cloudflare", "Google Cloud", "Railway", "Prometheus", "Grafana", "Git", "GitHub Actions", "CI/CD"],
     },
     {
       title: "Práticas e automação",
-      skills: ["Testes automatizados", "Selenium", "Playwright", "Pandas", "RPA", "Sentry", "PostHog", "Scrum", "ADRs"],
+      skills: ["Testes automatizados", "TDD", "Testes de integração e e2e", "Testes de carga (k6)", "Selenium", "Playwright", "Pandas", "RPA", "Sentry", "PostHog", "Scrum", "ADRs"],
     },
   ],
 
