@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -38,7 +39,75 @@ function ProjectLinks({ project }: { project: Project }) {
   );
 }
 
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <motion.div
+        whileHover={{ y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <Card className="border-border/50 bg-card hover:border-border transition-colors overflow-hidden">
+          {project.image && (
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              className="h-40 w-full object-cover"
+            />
+          )}
+          <CardContent className="flex flex-col">
+            <h4 className="text-lg font-semibold mb-2">{project.title}</h4>
+            <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.tech.map((tech) => (
+                <Badge
+                  key={tech}
+                  variant="secondary"
+                  className="text-xs font-normal"
+                >
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+            <ProjectLinks project={project} />
+            {project.detail && (
+              <p className="text-xs text-muted-foreground mt-4">{project.detail}</p>
+            )}
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Tailwind's md breakpoint. Read in JS because the two-column layout changes
+// the DOM order, not just the styling.
+const TWO_COLUMNS_QUERY = "(min-width: 768px)";
+
+function subscribeToTwoColumns(onChange: () => void) {
+  const query = window.matchMedia(TWO_COLUMNS_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function useTwoColumns() {
+  return useSyncExternalStore(
+    subscribeToTwoColumns,
+    () => window.matchMedia(TWO_COLUMNS_QUERY).matches,
+    () => true,
+  );
+}
+
 export function Projects() {
+  const twoColumns = useTwoColumns();
+
   if (projects.length === 0) return null;
 
   const [featured, ...rest] = projects;
@@ -131,63 +200,34 @@ export function Projects() {
           </Card>
         </motion.div>
 
-        {/* Masonry columns rather than a 2-col grid. A grid forced every card
-            in a row to the tallest one's height (short cards ended in dead
-            space) and left an empty slot whenever the count was odd — with
-            five cards, a hole the size of a card. Columns let each card keep
-            its natural height and pack against the one above it, so the block
-            has no gaps at any count. */}
-        {rest.length > 0 && (
-          <div className="gap-6 md:columns-2">
-            {rest.map((project, index) => (
-              <motion.div
-                key={project.title}
-                className="mb-6 break-inside-avoid"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <Card className="border-border/50 bg-card hover:border-border transition-colors overflow-hidden">
-                    {project.image && (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        className="h-40 w-full object-cover"
-                      />
-                    )}
-                    <CardContent className="flex flex-col">
-                      <h4 className="text-lg font-semibold mb-2">{project.title}</h4>
-                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tech.map((tech) => (
-                          <Badge
-                            key={tech}
-                            variant="secondary"
-                            className="text-xs font-normal"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                      <ProjectLinks project={project} />
-                      {project.detail && (
-                        <p className="text-xs text-muted-foreground mt-4">{project.detail}</p>
-                      )}
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        )}
+        {/* Masonry rather than a 2-col grid. A grid forced every card in a
+            row to the tallest one's height (short cards ended in dead space)
+            and left an empty slot whenever the count was odd. Each column is
+            its own stack, so cards keep their natural height and pack against
+            the one above. Cards alternate left/right instead of flowing down
+            CSS columns, so the config order reads row by row: the second and
+            third projects always sit side by side, whatever the card heights.
+            Below md it's one stack in config order. */}
+        {rest.length > 0 &&
+          (twoColumns ? (
+            <div className="grid grid-cols-2 items-start gap-6">
+              {[0, 1].map((column) => (
+                <div key={column} className="flex flex-col gap-6">
+                  {rest.map((project, index) =>
+                    index % 2 === column ? (
+                      <ProjectCard key={project.title} project={project} index={index} />
+                    ) : null,
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-6">
+              {rest.map((project, index) => (
+                <ProjectCard key={project.title} project={project} index={index} />
+              ))}
+            </div>
+          ))}
       </div>
     </section>
   );
