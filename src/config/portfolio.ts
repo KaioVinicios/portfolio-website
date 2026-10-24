@@ -119,8 +119,8 @@ export const portfolioConfig: PortfolioConfig = {
       description:
         "SaaS de armazenamento de arquivos com criptografia AES-GCM ponta a ponta e verificação de integridade em blockchain (Ethereum e Polygon). Os arquivos são cifrados antes do envio, de modo que o servidor nunca tem acesso ao conteúdo. Em produção.",
       tech: ["Django REST", "Python", "PostgreSQL", "React", "TypeScript", "Web3", "AES-GCM", "Docker", "Stripe"],
-      github: "https://github.com/RosettaSolutions/CryptoVaultFrontEnd",
-      live: "https://cryptovault.rosetta-solutions.com",
+      github: "https://github.com/voynan/cryptovault-web",
+      live: "https://cryptovault.voynan.com",
     },
     {
       title: "Distributed Wager Processor",
